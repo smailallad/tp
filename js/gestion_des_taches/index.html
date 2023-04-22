@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestionnaire de tâches</title>
+    <link rel="stylesheet" href="styles/popup.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <script type="module" src="scripts/principal.js"></script>
+
+  </head>
+
+  <body>
+    <div class="popup-conteneur invisible">
+      <div class="texte-conteneur">
+        <div class="bouton-fermer">
+          <span>X</span>
+        </div>
+        <p>
+          La tache a ete ajoutee.
+        </p>
+      </div>
+      <div class="bg"></div>
+    </div>
+    <div class="conteneur">
+    <h1>Gestionnaire de tâches</h1>
+    <input type="text" />
+    <input type="button" class="bouton-nouvelle-tache" value="Ajouter" />
+
+    <div class="gabarit tache-conteneur invisible">
+
+      <input type="checkbox" name="" id="" />
+      <span class="nom-tache">Nom de la tâche à modifier</span>
+      <input type="button" class="bouton-supprimer" value="Supprimer" />
+    </div>
+    <hr>
+    <div class="liste-taches"></div>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h2>Contacte:</h2>
+        <button onclick="charger();">Charger contact</button>
+        <p id="p1"></p>
+        <form enctype="multipart/form-data" method="post">
+            <p><input type="text" name="nom" id="nom"></p>
+            <!-- <p><input type="file" name="fichier" id="fichier"></p> -->
+            <p><input type="button" value="envoyer" onclick="upload(this.form);"></p>
+        </form>
+    </div>
+    <script src="myAjax.js"></script>
+    <script>
+        function charger() {
+            let data = { a: 23, b: 'abcd', c: 65 }
+            myAjax.myGet('contacts.json', data, success, error)
+        }
+
+        function upload(frm) {
+            myAjax.myPost('page2.php', frm, success, error)
+            //myAjax.myPost('contacts.json',frm,success,error)
+        }
+
+        function success(data) {
+            resultat = JSON.parse(data)
+            let valeur = ''
+            for (i = 0; i < resultat.length; i++) {
+                valeur += resultat[i].nom + '<br>'
+            }
+            //valeur = resultat.nom
+            document.getElementById('p1').innerHTML = valeur
+            console.log(data)
+            console.log(resultat)
+        }
+
+        function error(err, tErr) {
+            console.log(err, tErr)
+        }
+    </script>
+</body>
+
+</html>

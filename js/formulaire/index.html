@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Billeterie d'autobus</title>
+</head>
+<body>
+    <h3>Achat de biellet d'autobus</h3>
+    <form id="formulaire">
+        <div class="contenu">
+            <div id="page1" class="page">
+                <h4>Etape 1 - informations personnelles </h4>
+                <div class="groupe">
+                    <label for="nom">Nom complet <small> *obligatoire</small> </label><br>
+                    <input type="text" name="nom" id="nom" required="required">
+                    <p class="message-invalide">Vous devez saisir un nom</p>
+                </div>
+                <div class="groupe">
+                    <label for="email">couriel <small> *obligatoire</small> </label><br>
+                    <input type="email" name="email" id="email" required="required">
+                    <p class="message-invalide">Entrer un couriel correcte</p>
+                </div>
+                <h4>Etape 2 - informations sur la destination </h4>
+                <div class="groupe gauche">
+                    <label for="date-depart">date de depart <small> *obligatoire</small> </label><br>
+                    <input type="date" name="date-depart" id="date-depart" required="required">
+                    <p class="message-invalide">Vous devez saisir une date</p>
+                </div>
+                <div class="groupe gauche">
+                    <label for="aller-retour">Aller-retour</label><br>
+                    <input type="checkbox" name="aller-retour" id="aller-retour" checked>
+                </div>
+                <div class="groupe gauche" id="div-retour">
+                    <label for="date-retour">date de retour <small> *obligatoire</small> </label><br>
+                    <input type="date" name="date-retour" id="date-retour" required="required">
+                    <p class="message-invalide">Vous devez saisir une date</p>
+                </div>
+                <div class="inline">
+                    <label for="destination">Destination <small> *obligatoire</small></label><br>
+                    <select name="destination" id="destination">
+                        <option value="Québec">Québec</option>
+                        <option value="Sherbrooke">Sherbrooke</option>
+                        <option value="Rouyn-Noranda">Rouyn-Noranda</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="page2" class="page invisible">
+                <h4>Etape 3 - informations sur le billet </h4>
+                <label for="nbr-billet">Nombre de billet </label><br>
+                <input type="number" name="nbr-billet" id="nbr-billet" value="1" min="1" max="5" step="1" pattern="\d+"><br>
+                <div class="gabarit rangee-bouton invisible" data-index="">
+                    <p>Billet N :</p>
+                    <input type="radio" name="" value="regulier" checked> <label for="">Tarif regulier</label>
+                    <input type="radio" name="" value="senior"><label for="">Tarif senior</label>
+                    <input type="radio" name="" value="etudiant"><label for="">Tarif etudiant</label>
+                </div>
+                <div class="liste-clone">
+                   
+                </div>
+            </div>
+
+            <div id="page3" class="page invisible">
+            </div>
+            <hr>
+            <div class="groupe">
+                <button class="boutton gauche" id="retour">Retour</button>
+                <button class="boutton droit" id="continuer">Continuer</button>
+            </div>
+        </div>
+    </form>
+
+    <script src="js.js"></script>
+</body>
+</html>

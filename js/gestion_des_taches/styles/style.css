@@ -1,0 +1,41 @@
+.conteneur {
+    width: 490px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px;
+    padding: 40px;
+    border-radius: 10px;
+}
+.nom-tache {
+    width: 350px;
+    display:inline-block;
+}
+
+.tache-conteneur .nom-tache {
+    /* ajouter une transition */  
+    transition-property: color;
+    transition-duration: 3s;
+}
+
+.tache-conteneur[data-survol="true"] .nom-tache {
+    color: fuchsia;
+}
+.invisible {
+    display: none;
+}
+.gabarit {
+    margin: 10px 0px;
+ }
+
+input:checked + span {
+    color: gray;
+    text-decoration: line-through;
+  }
+
+input[type=text]  {
+    width: 370px;
+}
+
+input[type=button] {
+    width: 100px;
+}

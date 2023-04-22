@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <form action="#">
+      <p>
+         <label for="string1">Chaine1:</label>
+         <input type="text" name="string1" id="string1"> ->
+         <input type="text" name="string1_r" id="string1_r">
+      </p>
+
+      <p>
+         <label for="string2">Chaine2:</label>
+         <input type="text" name="string2" id="string2"> ->
+         <input type="text" name="string2_r" id="string2_r">
+      </p>
+      <p>
+         <label for="method">Methode:</label>
+         <input type="radio" name="method" id="method_get" value="GET" checked="checked">get
+         <input type="radio" name="method" id="method_post" value="POST">post
+      </p>
+      <input type="button" class="ButtonXL" value="Exécuter l'exemple" onclick="request04(this.form)">
+   </form>
+   <script type="text/javascript">
+      function request04(f){
+         var xhr_object = new XMLHttpRequest();
+
+         var method   = f.elements["method"][0].checked ? "GET" : "POST";
+         var filename = "strings2.php";
+         var s1       = f.elements["string1"].value;
+         var s2       = f.elements["string2"].value;
+         var data     = null;
+
+         if (s1 != "" && s2 != "") {
+            data = "s1="+s1+"&s2="+s2;
+         }
+         console.log(data);
+         console.log(method)
+         if (method == "GET" && data != null) {
+            filename += "?"+data;
+            data      = null;
+         }
+
+         xhr_object.open(method, filename, true);
+
+         xhr_object.onreadystatechange = function() {
+            if(xhr_object.readyState == 4) {
+               //console.log(xhr_object.responseText)
+               var tmp = xhr_object.responseText.split(":");
+               if(typeof(tmp[1]) != "undefined") {
+                  f.elements["string1_r"].value = tmp[1];
+                  f.elements["string2_r"].value = tmp[2];
+               }
+               //console.log(tmp[0]);
+            }
+         }
+
+         if (method == "POST") {
+            xhr_object.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+         }
+
+         xhr_object.send(data);
+      }
+
+   </script>
+   
+</body>
+</html>
