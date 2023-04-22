@@ -11,7 +11,7 @@ FLUSH PRIVILEGES;
 define("SERVER", "localhost");
 define("USERNAME", "test");
 define("PASSWORD", "test");
-define("DBNAME", "blog_tp2");
+define("DBNAME", "bd_ecole");
 function connectDB()
 {
     //se connecter à la base de données
@@ -23,21 +23,21 @@ function connectDB()
     return $c;
 }
 $connexion = connectDB();
-function verifierAuteur($nom, $motpasse)
+function verifierUser($email, $motpasse)
 {
-    if (strlen($nom) == 0 || strlen($motpasse) == 0) {
+    if (strlen($email) == 0 || strlen($motpasse) == 0) {
         return false;
     }
-    //Recupere l'auteur dans la BD
+    //Recupere l'user dans la BD
     global $connexion;
     /* Crée une requête préparée */
-    if ($requete = mysqli_prepare($connexion, "SELECT id_auteur,password_auteur FROM auteur WHERE nom_auteur=?")) {
+    if ($requete = mysqli_prepare($connexion, "SELECT email,password FROM users WHERE email=?")) {
         /* Lecture des marqueurs */
-        mysqli_stmt_bind_param($requete, "s", $nom);
+        mysqli_stmt_bind_param($requete, "s", $email);
         /* Exécution de la requête */
         mysqli_stmt_execute($requete);
         /* Lecture des variables résultantes */
-        mysqli_stmt_bind_result($requete, $id_auteur, $mp);
+        mysqli_stmt_bind_result($requete, $id, $mp);
         /* Récupération des valeurs */
         if (mysqli_stmt_fetch($requete) !== null) {
             /* Verifier le mot de passe dans le cas mot de passe en dure */
@@ -45,8 +45,8 @@ function verifierAuteur($nom, $motpasse)
                 if (session_status() == PHP_SESSION_NONE){
                     session_start();
                 }
-                $_SESSION["auteur"] = $nom;
-                $_SESSION["id_auteur"] = $id_auteur;
+                $_SESSION["user"] = $email;
+                $_SESSION["id"] = $id;
                 return true;
             }*/
             /* Verifier le mot de passe dans le cas mot de passe crypter */
@@ -55,8 +55,8 @@ function verifierAuteur($nom, $motpasse)
                 if (session_status() == PHP_SESSION_NONE) {
                     session_start();
                 }
-                $_SESSION["auteur"] = $nom;
-                $_SESSION["id_auteur"] = $id_auteur;
+                $_SESSION["user_email"] = $email;
+                $_SESSION["user_id"] = $id;
                 return true;
             }
         }
@@ -65,19 +65,19 @@ function verifierAuteur($nom, $motpasse)
     }
     return false;
 }
-function auteurConneter()
+function userConneter()
 {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    return isset($_SESSION["auteur"]) ? $_SESSION["auteur"] : false;
+    return isset($_SESSION["user_email"]) ? $_SESSION["user_email"] : false;
 }
-function idAuteurConneter()
+function idUserConneter()
 {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    return isset($_SESSION["id_auteur"]) ? $_SESSION["id_auteur"] : false;
+    return isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : false;
 }
 function deconnecter()
 {
@@ -86,20 +86,20 @@ function deconnecter()
     }
     session_unset();
 }
-function ajouter_auteur($nom_auteur, $password_auteur)
+function ajouter_user($email, $password)
 {
     //obtenir la connexion définie plus haut (à l'extérieur de la fonction)
     global $connexion;
     //on prépare la requête en mettant des ? à la place des paramètres qui viennent de l'usager
-    $requete = "INSERT INTO auteur (nom_auteur, password_auteur) VALUES ( ? , ?)";
+    $requete = "INSERT INTO users (email, password) VALUES ( ? , ?)";
     //on prépare la requête
     $reqPrep = mysqli_prepare($connexion, $requete);
     //si la requête préparée fonctionne 
     if ($reqPrep) {
         //Crypter le mot de passe
-        $password_auteur = password_hash($password_auteur, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         //faire le lien
-        mysqli_stmt_bind_param($reqPrep, "ss", $nom_auteur, $password_auteur);
+        mysqli_stmt_bind_param($reqPrep, "ss", $email, $password);
         //exécute la requête
         mysqli_stmt_execute($reqPrep);
         // return erreur si ya erreur et true si pas d'erreur
@@ -108,18 +108,18 @@ function ajouter_auteur($nom_auteur, $password_auteur)
     }
     return "Erreur.";
 }
-function ajouter_article($titre, $texte, $date_article, $time_article, $id_auteur)
+function ajouter_cour($titre, $texte)
 {
     //obtenir la connexion définie plus haut (à l'extérieur de la fonction)
     global $connexion;
     //on prépare la requête en mettant des ? à la place des paramètres qui viennent de l'usager
-    $requete = "INSERT INTO article (titre, texte, date_article, time_article, id_auteur) VALUES ( ? , ? , ? , ? , ?)";
+    $requete = "INSERT INTO cour (titre, texte, date_cour, time_cour, id) VALUES ( ? , ? , ? , ? , ?)";
     //on prépare la requête
     $reqPrep = mysqli_prepare($connexion, $requete);
     //si la requête préparée fonctionne 
     if ($reqPrep) {
         //faire le lien
-        mysqli_stmt_bind_param($reqPrep, "ssssi", $titre, $texte, $date_article, $time_article, $id_auteur);
+        mysqli_stmt_bind_param($reqPrep, "ssssi", $titre, $texte, $date_cour, $time_cour, $id);
         //exécute la requête
         mysqli_stmt_execute($reqPrep);
         // return erreur si ya erreur et true si pas d'erreur
@@ -128,18 +128,18 @@ function ajouter_article($titre, $texte, $date_article, $time_article, $id_auteu
     }
     return "Erreur.";
 }
-function modifier_article($id_article, $titre, $texte, $date_article, $time_article)
+function modifier_cour($id_cour, $titre, $texte, $date_cour, $time_cour)
 {
     //obtenir la connexion définie plus haut (à l'extérieur de la fonction)
     global $connexion;
     //on prépare la requête en mettant des ? à la place des paramètres qui viennent de l'usager
-    $requete = "UPDATE article SET titre=?,texte=?,date_article=?,time_article=? WHERE id_article = ?";
+    $requete = "UPDATE cour SET titre=?,texte=?,date_cour=?,time_cour=? WHERE id_cour = ?";
     //on prépare la requête
     $reqPrep = mysqli_prepare($connexion, $requete);
     //si la requête préparée fonctionne 
     if ($reqPrep) {
         //faire le lien
-        mysqli_stmt_bind_param($reqPrep, "ssssi", $titre, $texte, $date_article, $time_article, $id_article);
+        mysqli_stmt_bind_param($reqPrep, "ssssi", $titre, $texte, $date_cour, $time_cour, $id_cour);
         //exécute la requête
         mysqli_stmt_execute($reqPrep);
         // return erreur si ya erreur et true si pas d'erreur
@@ -148,18 +148,18 @@ function modifier_article($id_article, $titre, $texte, $date_article, $time_arti
     }
     return "Erreur.";
 }
-function supprimer_article($id_article)
+function supprimer_cour($id_cour)
 {
     //obtenir la connexion définie plus haut (à l'extérieur de la fonction)
     global $connexion;
     //on prépare la requête en mettant des ? à la place des paramètres qui viennent de l'usager
-    $requete = "DELETE FROM article WHERE id_article = ? ";
+    $requete = "DELETE FROM cour WHERE id_cour = ? ";
     //on prépare la requête
     $reqPrep = mysqli_prepare($connexion, $requete);
     //si la requête préparée fonctionne 
     if ($reqPrep) {
         //faire le lien
-        mysqli_stmt_bind_param($reqPrep, "i", $id_article);
+        mysqli_stmt_bind_param($reqPrep, "i", $id_cour);
         //exécute la requête
         mysqli_stmt_execute($reqPrep);
         // return erreur si ya erreur et true si pas d'erreur
@@ -168,30 +168,25 @@ function supprimer_article($id_article)
     }
     return "Erreur.";
 }
-function liste_articles($titre, $texte)
+function liste_cours($libelle)
 {
     //obtenir la connexion définie plus haut (à l'extérieur de la fonction)
     global $connexion;
-    $sql = "SELECT * FROM article INNER JOIN auteur ON article.id_auteur = auteur.id_auteur ";
-    if ($titre != "") {
-        $sql .= " WHERE titre LIKE '$titre%' ";
-        if ($texte != "") {
-            $sql .= " AND texte LIKE '$texte%' ";
-        }
-    } elseif ($texte != "") {
-        $sql .= " WHERE texte LIKE '$texte%' ";
+    $sql = "SELECT * FROM courses";
+    if ($libelle != "") {
+        $sql .= " WHERE libelle LIKE '%$libelle%' ";
     }
-    $sql .= " ORDER BY id_article DESC";
+    $sql .= " ORDER BY id DESC";
     $requete = $connexion->prepare($sql);
     $requete->execute();
     $result = $requete->get_result();
     return $result;
 }
-function obtenir_article_par_id($id_article)
+function obtenir_cour_par_id($id_cour)
 {
     //obtenir la connexion définie plus haut (à l'extérieur de la fonction)
     global $connexion;
-    $sql = "SELECT * FROM article WHERE id_article = $id_article ";
+    $sql = "SELECT * FROM cour WHERE id_cour = $id_cour ";
     $requete = $connexion->prepare($sql);
     $requete->execute();
     $result = $requete->get_result();

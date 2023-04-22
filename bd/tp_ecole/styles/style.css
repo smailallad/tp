@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+input[type='submit'] {
+    padding: 5px;
+}
+nav{
+    background-color:silver;
+    padding:  10px 20px;
+}
+table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    width: 100%;
+    border-collapse:collapse;
+}
+td { 
+    border-width:1px;
+    border-style:solid; 
+    padding: 5px;
+}
+th{
+    border-width:1px;
+    border-style:solid; 
+    padding: 5px;
+    font-weight: bold; 
+    text-align: left;
+}
+hr{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.form-group{
+    margin-top: 10x;
+    margin-bottom: 10px;
+}
+.contenu {
+    padding: 10px;
+}
+.connexion{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background: silver;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 20px 50px;
+    width: 200px;
+}
+.connexion p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.connexion hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.erreur{
+    color: red;
+    background: lightsalmon;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: -20px;
+    margin-left: -50px;
+    margin-right: -50px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.message{
+    color: red;
+    background: lightsalmon;
+    text-align: center;
+    padding: 10px 20px;
+    /*margin-top: -20px;
+    margin-left: -50px;
+    margin-right: -50px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;*/
+}
+.formulaire,.inscription{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background: silver;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 20px 50px;
+    width: 600px;
+}
+.inscription label{
+    display: inline-block;
+    width: 250px;
+}
+.formulaire label{
+    display: inline-block;
+    width: 100px;
+}
+.recherche {
+    border: 1px solid;
+    padding: 20px 10px;
+}

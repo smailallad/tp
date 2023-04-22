@@ -19,9 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `blog_tp2`
+-- Base de données : `bd_ecole`
 --
-
+CREATE DATABASE IF NOT EXISTS `b_ecole` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bd_ecole`;
 -- --------------------------------------------------------
 
 --
