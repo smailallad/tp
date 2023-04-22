@@ -1,0 +1,126 @@
+/* en apprendre plus sur le zoo */
+/* cartes-article */
+.conteneur-cartes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+}
+
+.carte-article>img {
+    width: 400px;
+    height: 350px;
+}
+
+.carte-article h3 {
+    text-align: left;
+    max-width: 400px;
+    font-weight: 100;
+    font-size: 1.5em;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.carte-article {
+    position: relative;
+}
+
+.carte-article .cercle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--bleuNoir);
+    font-size: 10px;
+    font-weight: bold;
+    transform: rotate(20deg);
+}
+
+.carte-article .cercle-couleur {
+    background-color: var(--jauneBrun);
+}
+
+.carte-article .texte-image-cercle {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    translate: -60% -40%;
+}
+
+.carte-article .cercle:hover {
+    animation-name: changement-de-couleur;
+    animation-duration: 4s;
+}
+
+
+
+@keyframes changement-de-couleur {
+    from {
+        background-color: rgb(219, 109, 109);
+    }
+
+    to {
+        background-color: rgb(246, 4, 4);
+    }
+}
+
+/* carte */
+.carte {
+    display: grid;
+    justify-items: center;
+    align-self: center;
+}
+
+.carte p {
+    color: rgb(5, 13, 28);
+    font-size: 1.205em;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 15px 15px 0 0;
+    background-color: var(--jauneMoinsPale);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.carte>img {
+    width: 400px;
+    height: 400px;
+
+}
+
+.carte:hover {
+    transform: scale(0.95);
+    transition-duration: 800ms;
+}
+
+@media screen and (max-width:550px) {
+    .carte-article {
+        max-width: 325px;
+    }
+
+    .carte-article>img {
+        max-width: 325px;
+        height: 350px;
+    }
+
+    .carte>img {
+        max-width: 325px;
+        height: 400px;
+
+    }
+
+    .carte-article h3 {
+        max-width: 350px;
+    }
+
+    .carte-article .cercle {
+        display: none;
+    }
+}

@@ -1,0 +1,173 @@
+@import"bouton.css";
+@import"nav.css";
+@import"banniere.css";
+@import"cartes.css";
+@import"grille.css";
+@import"socialMedia.css";
+@import"logo.css";
+/*@import"swiper.css";*/
+
+:root {
+    /*============================ */
+    /* = COLORS */
+    /*============================ */
+    --jauneBrun: rgb(179, 179, 23);
+    --jaunePale: rgb(252, 248, 220);
+    --jauneMoinsPale: rgb(243, 243, 166);
+    --bleuVert: rgb(13, 71, 89);
+    --bleuNoir: rgb(5, 13, 28);
+    --Vert: rgb(101, 138, 129);
+    /*============================ */
+    /* = SPACING */
+    /*============================ */
+    --spacing-pico: 0.1rem;
+    --spacing-nano: 0.3rem;
+    --spacing-micro: .5rem;
+    /*--- */
+    --spacing-thinnest: 1rem;
+    --spacing-thinner: 1.5rem;
+    --spacing-thin: 2rem;
+    --spacing-broad: 4rem;
+    --spacing-broader: 6rem;
+    --spacing-broadest: 8rem;
+    --spacing-large: 10rem;
+    --spacing-larger: 12rem;
+    --spacing-largest: 16rem;
+    /*--- */
+    --spacing-mega: 24rem;
+    --spacing-giga: 54rem;
+    --spacing-tera: 78rem;
+
+    /*========================= */
+    /* = FONT-SIZE */
+    /*========================= */
+    --font-miniature: 10px;
+    --font-shortest: 12px;
+    --font-shorter: 14px;
+    --font-short: 15px;
+    --font-current: 16px;
+    --font-tall: 21px;
+    --font-taller: 32px;
+    --font-tallest: 38px;
+    --font-huge: 46px;
+    --font-huger: 80px;
+    --font-hugest: 80px;
+    --font-giant: 120px;
+    /*========================= */
+    /* = LINE-HEIGHT */
+    /*========================= */
+    --line-height-perfect: 1em;
+    --line-height-compressed: 1.0em;
+    --line-height-tightest: 1.26875em;
+    --line-height-tighter: 1.62875em;
+    --line-height-tight: 1.74285em;
+    --line-height-normal: 2.375em;
+    --line-height-loose: 3.6em;
+    --line-height-looser: 4.2em;
+    --line-height-loosest: 5.0em;
+}
+
+
+/* règles générales */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: "Helvetica", "Arial", "Verdana", sans-serif;
+    line-height: 1.5;
+    letter-spacing: var(--spacing-pico);
+    font-weight: 100;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #D3D3D3;
+}
+
+main>*+* {
+    margin-top: 40px;
+}
+
+h1 {
+    word-spacing: 2.1px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
+    color: black;
+    font-size: 2em;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    object-fit: cover;
+}
+
+header section {
+    display: flex;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centered {
+    text-align: center;
+    font-size: 22px;
+    padding: 30px 20px;
+    ;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding-top: 40px;
+    background-color: var(--bleuVert);
+}
+
+footer>div small {
+    display: flex;
+    justify-content: center;
+    color: var(--jauneBrun);
+    padding-top: 25px;
+    font-size: var(--font-tall);
+}
+
+.nav-menu.en-bas a {
+    line-height: 1.4;
+    padding-bottom: 10px;
+}
+
+@media screen and (max-width:450px) {
+    h2 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    img {
+        padding: 5px 5px;
+    }
+
+    footer>div small {
+        text-align: center;
+    }
+}

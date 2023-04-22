@@ -1,0 +1,105 @@
+/* section de navigation haut et bas de page */
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; 
+    gap: 20px; 
+
+    max-width: 100%;
+    padding:20px;
+    text-transform: uppercase;  
+    background-color: var(--bleuVert); 
+}
+
+
+nav a {
+    color: var(--jaunePale);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-current);
+    font-weight: bold;
+}
+
+nav span{
+    font-size: var(--font-current);
+    color: var(--jaunePale);
+    font-weight: bold;
+}
+
+nav .billetterie{
+    color: var(--jauneBrun);      
+}
+nav .billetterie:hover{
+    transition-duration: 800ms;
+    transform: scale(1.05);
+}
+.nav-menu{
+    display: flex;
+    justify-content: space-around;
+    gap:15px;
+}
+
+.nav-sousmenu{
+    position: relative;
+    z-index: 1;
+
+}
+/* Navigation sous-menu */
+
+.nav-sousmenu>div {
+    position: absolute;
+    width: max-content;
+   
+    top: 100%;
+    left: -8px;
+    
+    background-color: var(--bleuNoir);   
+}
+
+.nav-sousmenu>div>a {
+    padding: 8px;
+    text-align: left;
+    width: max-content;
+    color: var(--jaunePale);
+}
+
+/*lorsqu'on pointe sur un lien pour activer une transformation*/
+nav a:hover {
+    text-decoration: underline;
+}
+
+/*pour les div sous le navSousMenu lorsqu'on n'est pas pointé dessu*/
+.nav-sousmenu:not(:hover)>div {
+    /*pour cacher le sous menu lorsqu'on ne pointe pas dessus*/
+    opacity: 0;
+    /*afin de dire si le pointeur de la souris changera*/
+    pointer-events: none;
+}
+/* navigation footer */
+.nav-menu.en-bas{
+    display: flex;
+    flex-direction: column;
+}
+@media only screen and (max-width: 1300px) {
+    nav{
+        flex-direction: column;
+    }
+    .nav-menu {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    nav .logo{
+       display: none; 
+    }
+    .nav-menu.en-bas{
+        border-bottom: 1px solid grey;
+        padding-bottom: 15px;
+    }    
+}
+  
+
+
+
