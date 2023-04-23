@@ -40,15 +40,6 @@ function verifierUser($email, $motpasse)
         mysqli_stmt_bind_result($requete, $id, $mp);
         /* Récupération des valeurs */
         if (mysqli_stmt_fetch($requete) !== null) {
-            /* Verifier le mot de passe dans le cas mot de passe en dure */
-            /*if ($motpasse == $mp){
-                if (session_status() == PHP_SESSION_NONE){
-                    session_start();
-                }
-                $_SESSION["user"] = $email;
-                $_SESSION["id"] = $id;
-                return true;
-            }*/
             /* Verifier le mot de passe dans le cas mot de passe crypter */
 
             if (password_verify($motpasse, $mp)) {
